@@ -4,7 +4,7 @@
     "module": "ESNext",
     "strict": true,
     "esModuleInterop": true,
-      "jsx": "react",
+    "jsx": "react",
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
     "types": ["vitest", "node"],
