@@ -1,5 +1,12 @@
 {
+  "scripts": {
+  "dev": "netlify dev"
+},
+
   "dependencies": {
     "dotenv": "^16.4.7"
+  },
+  "devDependencies": {
+    "netlify": "^13.3.4"
   }
 }
