@@ -2,6 +2,4 @@
   base = "frontend"
   publish = "dist"
   command = "npm run build"
-
-  # Optional, only needed if you want to use functions:
-  # functions = "../backend/netlify/functions"
+  functions = "../backend/src/netlify/functions"
