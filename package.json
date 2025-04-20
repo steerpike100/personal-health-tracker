@@ -1,6 +1,7 @@
 {
   "scripts": {
-  "dev": "netlify dev"
+  "dev": "netlify dev",
+  "build": "npm --prefix backend run build && npm --prefix frontend run build"
 },
 
   "dependencies": {

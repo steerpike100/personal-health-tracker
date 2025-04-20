@@ -9,7 +9,7 @@ export const handler: Handler = async () => {
         body: JSON.stringify({ message: "✅ Connected to MongoDB!" }),
       };
     } catch (err) {
-      console.error("MongoDB connection error:", err); // 👈 Add this
+      console.error("MongoDB connection error:", err); 
       return {
         statusCode: 500,
         body: JSON.stringify({ error: "❌ DB connection failed" }),
