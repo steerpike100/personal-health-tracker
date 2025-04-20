@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { ActivityCard } from "./ActivityCard";
+import { Toast } from "./Toast";
 
 type Activity = {
   id: number;
@@ -14,6 +15,8 @@ export const ActivityList: React.FC = () => {
   const [activities, setActivities] = useState<Activity[]>([]);
   const [loading, setLoading] = useState(true);
   const [syncing, setSyncing] = useState(false);
+  const [toastMsg, setToastMsg] = useState("");
+
 
   const fetchActivities = async () => {
     try {
@@ -32,10 +35,14 @@ export const ActivityList: React.FC = () => {
     try {
       setSyncing(true);
       await fetchActivities();
+      setToastMsg("✅ Activities synced!");
+    } catch {
+      setToastMsg("⚠️ Sync failed.");
     } finally {
       setSyncing(false);
     }
   };
+  
 
   useEffect(() => {
     fetchActivities();
@@ -46,16 +53,39 @@ export const ActivityList: React.FC = () => {
       <div className="flex justify-between items-center">
         <h2 className="text-xl font-bold">Recent Activities</h2>
         <button
-          onClick={syncNow}
-          disabled={syncing}
-          className={`px-4 py-2 text-sm rounded font-medium transition ${
-            syncing
-              ? "bg-gray-400 cursor-not-allowed"
-              : "bg-blue-600 hover:bg-blue-700 text-white"
-          }`}
-        >
-          {syncing ? "Syncing..." : "🔁 Sync Now"}
-        </button>
+  onClick={syncNow}
+  disabled={syncing}
+  className={`flex items-center gap-2 px-4 py-2 text-sm rounded font-medium transition ${
+    syncing
+      ? "bg-gray-400 cursor-not-allowed"
+      : "bg-blue-600 hover:bg-blue-700 text-white"
+  }`}
+>
+  {syncing && (
+    <svg
+      className="w-4 h-4 animate-spin text-white"
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      viewBox="0 0 24 24"
+    >
+      <circle
+        className="opacity-25"
+        cx="12"
+        cy="12"
+        r="10"
+        stroke="currentColor"
+        strokeWidth="4"
+      ></circle>
+      <path
+        className="opacity-75"
+        fill="currentColor"
+        d="M4 12a8 8 0 018-8v8H4z"
+      ></path>
+    </svg>
+  )}
+  {syncing ? "Syncing..." : "🔁 Sync Now"}
+</button>
+
       </div>
 
       {loading ? (
@@ -69,6 +99,9 @@ export const ActivityList: React.FC = () => {
           ))}
         </div>
       )}
+      {toastMsg && <Toast message={toastMsg} onClose={() => setToastMsg("")} />}
+
     </div>
   );
 };
+
