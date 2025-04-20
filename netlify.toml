@@ -1,12 +1,11 @@
 [build]
-  publish = "frontend/dist"
+  base = "frontend"
+  publish = "dist"
   command = "npm run build"
 
 [functions]
   directory = "backend/dist/netlify/functions"
-  node_bundler = "esbuild"
 
 [dev]
   port = 8899
   staticServerPort = 4000
-
