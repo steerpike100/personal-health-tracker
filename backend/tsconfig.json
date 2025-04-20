@@ -13,7 +13,7 @@
     "paths": {
       "@clients/*": ["lib/clients/*"],
       "@models/*": ["models/*"],
-      "@utils/*": ["utils/*"],
+      "@utils/*": ["utils/*"]
     }
   },
   "exclude": ["node_modules", "**/*.test.ts"]
