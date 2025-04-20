@@ -7,5 +7,6 @@
   node_bundler = "esbuild"
 
 [dev]
-  targetPort = 5001
-  port = 8888
+  port = 8899
+  staticServerPort = 4000
+
