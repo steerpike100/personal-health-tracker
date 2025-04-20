@@ -19,6 +19,6 @@ export async function connectToDatabase() {
     return cachedConnection;
   } catch (error) {
     console.error("❌ MongoDB connection failed", error);
-    throw error;
+    throw error;    
   }
 }

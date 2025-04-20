@@ -8,8 +8,13 @@
     "strict": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
-    "types": ["@netlify/functions", "node"]
+    "types": ["@netlify/functions", "node"],
+    "baseUrl": "./src",
+    "paths": {
+      "@clients/*": ["lib/clients/*"],
+      "@models/*": ["models/*"],
+      "@utils/*": ["utils/*"],
+    }
   },
   "exclude": ["node_modules", "**/*.test.ts"]
 }
-
