@@ -1,0 +1,10 @@
+{
+  "name": "health-dashboard",
+  "scripts": {
+    "build": "npm run build --workspace=frontend && npm run build --workspace=backend"
+  },
+  "workspaces": [
+    "frontend",
+    "backend"
+  ]
+}
