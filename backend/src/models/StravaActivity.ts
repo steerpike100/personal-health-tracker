@@ -2,4 +2,4 @@ import mongoose from "mongoose";
 
 const StravaActivitySchema = new mongoose.Schema({}, {strict: false}); 
 
-export const StravaActivity = mongoose.models.StravaActivity || mongoose.model("StravaActivity", StravaActivitySchema); 
+export const StravaActivity = mongoose.models.StravaActivity || mongoose.model("StravaActivity", StravaActivitySchema, "strava_raw_activities"); 

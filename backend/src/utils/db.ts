@@ -16,6 +16,8 @@ export async function connectToDatabase() {
       dbName: "health-dashboard",
     });
     console.log("✅ MongoDB connected");
+    console.log("Connecting to MongoDB with URI:", MONGODB_URI);
+
     return cachedConnection;
   } catch (error) {
     console.error("❌ MongoDB connection failed", error);

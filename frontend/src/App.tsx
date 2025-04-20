@@ -1,7 +1,12 @@
-import React from "react";
+import { ActivityList } from "./components/ActivityList";
 
-const App: React.FC = () => {
-  return <h1>Hello, Turd!</h1>;
-};
+function App() {
+  return (
+    <div className="p-4 max-w-xl mx-auto">
+      <h1 className="text-2xl font-bold mb-4">Health Dashboard</h1>
+      <ActivityList />
+    </div>
+  );
+}
 
 export default App;

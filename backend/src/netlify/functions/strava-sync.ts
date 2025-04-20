@@ -11,7 +11,6 @@ export const handler: Handler = async () => {
     await connectToDatabase();
     const activities = await fetchStravaActivities(STRAVA_ACCESS_TOKEN);
 
-    // Optional: deduplicate before saving
     await StravaActivity.insertMany(activities);
 
     return {
