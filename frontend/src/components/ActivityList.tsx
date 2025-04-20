@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
+import { ActivityCard } from "./ActivityCard";
 
 type Activity = {
+  id: number;
   name: string;
   type: string;
   distance_km: string;
@@ -11,50 +13,62 @@ type Activity = {
 export const ActivityList: React.FC = () => {
   const [activities, setActivities] = useState<Activity[]>([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+  const [syncing, setSyncing] = useState(false);
+
+  const fetchActivities = async () => {
+    try {
+      setLoading(true);
+      const res = await fetch("/.netlify/functions/get-activities");
+      const data = await res.json();
+      setActivities(data);
+    } catch (error) {
+      console.error("Failed to load activities:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const syncNow = async () => {
+    try {
+      setSyncing(true);
+      await fetchActivities();
+    } finally {
+      setSyncing(false);
+    }
+  };
 
   useEffect(() => {
-    const fetchActivities = async () => {
-      try {
-        const res = await fetch("/.netlify/functions/get-activities");
-        const json = await res.json();
-        console.log("API response:", json);
-
-        // json should be a raw array
-        if (Array.isArray(json)) {
-          setActivities(json);
-        } else {
-          throw new Error("Expected an array, got: " + JSON.stringify(json));
-        }
-      } catch (err: any) {
-        console.error("Fetch error:", err);
-        setError(err.message);
-      } finally {
-        setLoading(false);
-      }
-    };
-
     fetchActivities();
   }, []);
 
-  if (loading) return <p>Loading activities...</p>;
-  if (error) return <p className="text-red-600">Error: {error}</p>;
-  if (!activities.length) return <p>No activities found.</p>;
-
   return (
-    <div>
-      <h2 className="text-xl font-bold mb-2">Recent Activities</h2>
-      <ul className="space-y-2">
-        {activities.map((act, index) => (
-          <li key={index} className="border p-3 rounded shadow-sm">
-            <p><strong>{act.name}</strong> ({act.type})</p>
-            <p>{act.distance_km} km in {act.moving_time_min} min</p>
-            <p className="text-sm text-gray-500">
-              {new Date(act.start_date).toLocaleString()}
-            </p>
-          </li>
-        ))}
-      </ul>
+    <div className="space-y-6">
+      <div className="flex justify-between items-center">
+        <h2 className="text-xl font-bold">Recent Activities</h2>
+        <button
+          onClick={syncNow}
+          disabled={syncing}
+          className={`px-4 py-2 text-sm rounded font-medium transition ${
+            syncing
+              ? "bg-gray-400 cursor-not-allowed"
+              : "bg-blue-600 hover:bg-blue-700 text-white"
+          }`}
+        >
+          {syncing ? "Syncing..." : "🔁 Sync Now"}
+        </button>
+      </div>
+
+      {loading ? (
+        <p>Loading activities...</p>
+      ) : activities.length === 0 ? (
+        <p>No activities found.</p>
+      ) : (
+        <div className="space-y-4">
+          {activities.map((act, index) => (
+            <ActivityCard key={index} activity={act} />
+          ))}
+        </div>
+      )}
     </div>
   );
 };
