@@ -1,5 +1,5 @@
 import type { Handler } from "@netlify/functions";
-import { connectToDatabase } from "../../utils/db.js";
+import { connectToDatabase } from "@utils/db";
 
 export const handler: Handler = async () => {
     try {

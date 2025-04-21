@@ -1,12 +1,16 @@
-[dev]
-  framework = "#custom"
-  port = 8899
-  staticServerPort = 4000
-
 [build]
-  base = "frontend"
-  publish = "dist"
-  command = "npm run build"
+base = "frontend"
+publish = "dist"
+command = "npm run build"
 
 [functions]
-  directory = "backend/dist/netlify/functions"
+directory = "backend/dist/netlify/functions"
+node_bundler = "esbuild"
+
+
+[dev]
+framework = "#custom"
+command = "npm --workspace frontend run dev"
+targetPort = 5173
+port = 8899
+functions = "backend/dist/netlify/functions"

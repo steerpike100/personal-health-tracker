@@ -10,10 +10,10 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.handler = void 0;
-const db_js_1 = require("../../utils/db.js");
+const db_1 = require("@utils/db");
 const handler = () => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        yield (0, db_js_1.connectToDatabase)();
+        yield (0, db_1.connectToDatabase)();
         return {
             statusCode: 200,
             body: JSON.stringify({ message: "✅ Connected to MongoDB!" }),
