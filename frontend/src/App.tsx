@@ -1,15 +1,35 @@
 import { ActivityList } from "./components/ActivityList";
 
-function App() {
+export default function App() {
   return (
-<div className="min-h-screen bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-white p-6">
-  <div className="max-w-2xl mx-auto">
-    <h1 className="text-3xl font-bold mb-6">🏥 Health Dashboard</h1>
-    <ActivityList />
-  </div>
-</div>
+    <div className="min-h-screen bg-gray-100 p-6">
+      <header className="text-center mb-10">
+        <h1 className="text-4xl font-extrabold tracking-tight text-blue-600">
+          🚴 Steve’s Health Dashboard
+        </h1>
+        <p className="text-lg text-gray-600 mt-2">
+          Tracking your Strava, Rouvy, and Samsung workouts in one place.
+        </p>
+      </header>
 
+      <main className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <section className="bg-white p-4 rounded shadow">
+          <h2 className="text-xl font-semibold mb-4 text-blue-700">Strava Activities</h2>
+          <ActivityList />
+        </section>
+
+        <section className="bg-white p-4 rounded shadow">
+          <h2 className="text-xl font-semibold mb-4 text-yellow-700">Rouvy Workouts</h2>
+          <p className="text-gray-500 italic">Coming soon…</p>
+        </section>
+
+        <section className="bg-white p-4 rounded shadow">
+          <h2 className="text-xl font-semibold mb-4 text-green-700">Samsung Health</h2>
+          <p className="text-gray-500 italic">Coming soon…</p>
+        </section>
+      </main>
+    </div>
   );
 }
 
-export default App;
+
