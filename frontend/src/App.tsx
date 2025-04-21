@@ -8,7 +8,7 @@ export default function App() {
           🚴 Steve’s Health Dashboard
         </h1>
         <p className="text-lg text-gray-600 mt-2">
-          Tracking your Strava, Rouvy, and Samsung workouts in one place.
+          Get fit you lazy fucker
         </p>
       </header>
 
