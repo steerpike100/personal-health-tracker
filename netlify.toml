@@ -3,7 +3,9 @@ publish = "frontend/dist"
 command = "npm run build"
 
 [functions]
-directory = "backend/dist/netlify/functions"
+directory = "backend/src/netlify/functions"
+node_bundler = "esbuild"
+
 
 [dev]
 framework = "#custom"
