@@ -1,8 +1,9 @@
 backend/node_modules
 frontend/node_modules
-# Local Netlify folder
-.netlify
 /node_modules
 .env
 frontend/dist
 backend/dist.netlify/
+.netlify/*
+!.netlify/state.json
+!.netlify/settings.json
