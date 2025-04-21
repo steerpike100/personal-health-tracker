@@ -1,11 +1,14 @@
 {
   "name": "personal-health-tracker",
   "private": true,
-  "scripts": {
-    "clean": "rm -rf frontend/dist backend/dist",
-    "build": "npm run clean && npm --workspace backend run build && npm --workspace frontend run build",
-    "start": "npm --workspace backend run build && netlify dev --cwd ."
-  },
+"scripts": {
+  "clean": "rm -rf frontend/dist backend/dist",
+  "build": "npm run clean && npm run build:backend && npm run build:frontend",
+  "build:backend": "npm --workspace backend run build",
+  "build:frontend": "npm --workspace frontend run build",
+  "start": "npm run build:backend && netlify dev --cwd ."
+},
+
   "workspaces": [
     "frontend",
     "backend"
