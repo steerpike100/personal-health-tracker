@@ -1,8 +1,11 @@
 {
-  "name": "health-dashboard",
-  "scripts": {
-    "build": "npm run build --workspace=frontend && npm run build --workspace=backend"
-  },
+  "name": "personal-health-tracker",
+  "private": true,
+ "scripts": {
+  "clean": "rm -rf frontend/dist backend/dist",
+  "build": "npm run clean && npm --workspace backend run build && npm --workspace frontend run build",
+  "start": "netlify dev"
+},
   "workspaces": [
     "frontend",
     "backend"

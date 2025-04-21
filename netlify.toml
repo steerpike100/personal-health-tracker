@@ -1,3 +1,8 @@
+[dev]
+  framework = "#custom"
+  port = 8899
+  staticServerPort = 4000
+
 [build]
   base = "frontend"
   publish = "dist"
@@ -5,7 +10,3 @@
 
 [functions]
   directory = "backend/dist/netlify/functions"
-
-[dev]
-  port = 8899
-  staticServerPort = 4000
