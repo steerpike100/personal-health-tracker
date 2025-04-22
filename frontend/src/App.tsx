@@ -5,7 +5,7 @@ export default function App() {
     <div className="min-h-screen bg-blue-900 text-white">
       <header className="text-center py-10">
         <h1 className="text-4xl font-bold mb-2">🚴 Steve’s Health Dashboard</h1>
-        <p className="text-lg text-blue-200 italic">Get fit you lazy fucker</p>
+        <p className="text-lg text-blue-200 italic">Get fit</p>
       </header>
 
       <main className="max-w-5xl mx-auto px-4 space-y-8 pb-10">
