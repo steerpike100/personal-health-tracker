@@ -14,6 +14,7 @@ interface StravaActivity {
 
 export async function fetchStravaActivities(accessToken: string): Promise<StravaActivity[]> {
   const response = await fetch(`${STRAVA_API_BASE}/athlete/activities`, {
+  
     headers: {
       Authorization: `Bearer ${accessToken}`,
     },

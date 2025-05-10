@@ -7,3 +7,4 @@ backend/dist.netlify/
 .netlify/*
 !.netlify/state.json
 !.netlify/settings.json
+.strava-token.json
