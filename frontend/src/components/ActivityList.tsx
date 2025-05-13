@@ -34,14 +34,24 @@ export const ActivityList: React.FC = () => {
   const syncNow = async () => {
     try {
       setSyncing(true);
+  
+      // Trigger backend sync from Strava → MongoDB
+      const syncRes = await fetch("/.netlify/functions/strava-sync");
+      const syncData = await syncRes.json();
+  
+      // Then fetch from MongoDB → UI
       await fetchActivities();
-      setToastMsg("✅ Activities synced!");
+  
+      setToastMsg(`✅ ${syncData.message || "Activities synced!"}`);
     } catch {
       setToastMsg("⚠️ Sync failed.");
     } finally {
       setSyncing(false);
     }
   };
+
+  
+  
   
 
   useEffect(() => {
