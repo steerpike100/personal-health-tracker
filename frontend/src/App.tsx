@@ -14,15 +14,7 @@ export default function App() {
           <ActivityList />
         </section>
 
-        <section className="bg-white bg-opacity-10 rounded-xl p-6 shadow-md backdrop-blur">
-          <h2 className="text-xl font-semibold mb-4 text-yellow-300">Rouvy Workouts</h2>
-          <p className="text-blue-200 italic">Coming soon…</p>
-        </section>
-
-        <section className="bg-white bg-opacity-10 rounded-xl p-6 shadow-md backdrop-blur">
-          <h2 className="text-xl font-semibold mb-4 text-green-300">Samsung Health</h2>
-          <p className="text-blue-200 italic">Coming soon…</p>
-        </section>
+      
       </main>
     </div>
   );

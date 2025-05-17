@@ -99,16 +99,35 @@ export const ActivityList: React.FC = () => {
       </div>
 
       {loading ? (
-        <p>Loading activities...</p>
-      ) : activities.length === 0 ? (
-        <p>No activities found.</p>
-      ) : (
-        <div className="space-y-4">
-          {activities.map((act, index) => (
-            <ActivityCard key={index} activity={act} />
-          ))}
-        </div>
-      )}
+  <p>Loading activities...</p>
+) : activities.length === 0 ? (
+  <p>No activities found.</p>
+) : (
+  <>
+    {/* 🚴 Rides (Rouvy + Outdoor) */}
+    <div className="space-y-4">
+      <h3 className="text-lg font-bold text-white mt-6 mb-2">🚴 Rides</h3>
+      {activities
+        .filter(act =>
+          act.type === "Ride" || act.name.toLowerCase().includes("rouvy")
+        )
+        .map((act, index) => (
+          <ActivityCard key={`ride-${index}`} activity={act} />
+        ))}
+    </div>
+
+    {/* 🏃 Walks & Runs */}
+    <div className="space-y-4">
+      <h3 className="text-lg font-bold text-white mt-6 mb-2">🏃 Runs & Walks</h3>
+      {activities
+        .filter(act => act.type === "Run" || act.type === "Walk")
+        .map((act, index) => (
+          <ActivityCard key={`runwalk-${index}`} activity={act} />
+        ))}
+    </div>
+  </>
+)}
+
       {toastMsg && <Toast message={toastMsg} onClose={() => setToastMsg("")} />}
 
     </div>
