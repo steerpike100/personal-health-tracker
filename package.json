@@ -1,16 +1,14 @@
 {
   "name": "personal-health-tracker",
   "private": true,
-"scripts": {
-  "clean": "rm -rf frontend/dist backend/dist",
-  "build": "npm run clean && npm run build:backend && npm run build:frontend",
-  "build:backend": "npm --workspace backend run build",
-  "build:frontend": "npm --workspace frontend run build",
-  "start": "npm run build:backend && netlify dev --cwd .",
-  "init:token": "ts-node scripts/init-strava-token.ts"
-
-},
-
+  "scripts": {
+    "clean": "rm -rf frontend/dist backend/dist",
+    "build": "npm run clean && npm run build:backend && npm run build:frontend",
+    "build:backend": "npm --workspace backend run build",
+    "build:frontend": "npm --workspace frontend run build",
+    "start": "npm run build:backend && netlify dev --cwd .",
+    "init:token": "ts-node scripts/init-strava-token.ts"
+  },
   "workspaces": [
     "frontend",
     "backend"
@@ -18,5 +16,8 @@
   "devDependencies": {
     "@netlify/esbuild": "^0.14.39-1",
     "esbuild": "^0.25.2"
+  },
+  "dependencies": {
+    "recharts": "^2.15.3"
   }
 }

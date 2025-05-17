@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { ActivityCard } from "./ActivityCard";
 import { Toast } from "./Toast";
+import { ActivityGraph } from "./ActivityGraph"; // Ensure this path is correct
 
 type Activity = {
   id: number;
@@ -50,8 +51,7 @@ export const ActivityList: React.FC = () => {
     }
   };
 
-  
-  
+
   
 
   useEffect(() => {
@@ -104,27 +104,50 @@ export const ActivityList: React.FC = () => {
   <p>No activities found.</p>
 ) : (
   <>
-    {/* 🚴 Rides (Rouvy + Outdoor) */}
-    <div className="space-y-4">
-      <h3 className="text-lg font-bold text-white mt-6 mb-2">🚴 Rides</h3>
-      {activities
-        .filter(act =>
-          act.type === "Ride" || act.name.toLowerCase().includes("rouvy")
-        )
-        .map((act, index) => (
-          <ActivityCard key={`ride-${index}`} activity={act} />
-        ))}
-    </div>
+    {/** 🚴 Filter & aggregate rides */}
+    {(() => {
+      const rides = activities.filter(
+        (act) => act.type === "Ride" || act.name.toLowerCase().includes("rouvy")
+      );
+      const rideDistance = rides.reduce((sum, act) => sum + parseFloat(act.distance_km), 0);
+      const rideTime = rides.reduce((sum, act) => sum + act.moving_time_min, 0);
 
-    {/* 🏃 Walks & Runs */}
-    <div className="space-y-4">
-      <h3 className="text-lg font-bold text-white mt-6 mb-2">🏃 Runs & Walks</h3>
-      {activities
-        .filter(act => act.type === "Run" || act.type === "Walk")
-        .map((act, index) => (
-          <ActivityCard key={`runwalk-${index}`} activity={act} />
-        ))}
-    </div>
+      return (
+        <div className="space-y-4">
+          <h3 className="text-lg font-bold text-white mt-6 mb-1">🚴 Rides</h3>
+          <p className="inline-block bg-white/20 text-white px-4 py-2 rounded-lg text-sm font-medium shadow mb-2">
+  🚴 {rides.length} rides · 📏 {rideDistance.toFixed(1)} km · ⏱️ {rideTime} min
+</p>
+<ActivityGraph data={rides} />
+
+          {rides.map((act, index) => (
+            <ActivityCard key={`ride-${index}`} activity={act} />
+          ))}
+        </div>
+      );
+    })()}
+
+    {/** 🏃 Filter & aggregate runs + walks */}
+    {(() => {
+      const runWalks = activities.filter(
+        (act) => act.type === "Run" || act.type === "Walk"
+      );
+      const runDistance = runWalks.reduce((sum, act) => sum + parseFloat(act.distance_km), 0);
+      const runTime = runWalks.reduce((sum, act) => sum + act.moving_time_min, 0);
+
+      return (
+        <div className="space-y-4">
+          <h3 className="text-lg font-bold text-white mt-6 mb-1">🏃 Runs & Walks</h3>
+          <p className="inline-block bg-white/20 text-white px-4 py-2 rounded-lg text-sm font-medium shadow mb-2">
+  🏃 {runWalks.length} activities · 📏 {runDistance.toFixed(1)} km · ⏱️ {runTime} min
+</p>
+<ActivityGraph data={runWalks} />
+          {runWalks.map((act, index) => (
+            <ActivityCard key={`runwalk-${index}`} activity={act} />
+          ))}
+        </div>
+      );
+    })()}
   </>
 )}
 
