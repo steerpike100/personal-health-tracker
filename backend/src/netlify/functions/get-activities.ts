@@ -9,7 +9,18 @@ export const handler: Handler = async () => {
     try{
         await connectToDatabase();
 
-        const activities = await StravaActivity.find({}).sort({start_date:-1}).limit(10).lean();
+  const activities = await StravaActivity.find({})
+  .sort({ start_date: -1 })
+  .limit(100) 
+  .lean();
+
+
+ console.log("🔢 Total fetched:", activities.length);
+activities.forEach((a: any) =>
+  console.log(`${a.start_date} | ${a.type} | ${a.name}`)
+);
+
+
 
         const trimmed = activities.map((act: any) => ({
             id: act.id,

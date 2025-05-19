@@ -17,7 +17,12 @@ const StravaActivity = (0, mongoose_1.model)("StravaActivity", StravaActivitySch
 const handler = () => __awaiter(void 0, void 0, void 0, function* () {
     try {
         yield (0, db_1.connectToDatabase)();
-        const activities = yield StravaActivity.find({}).sort({ start_date: -1 }).limit(10).lean();
+        const activities = yield StravaActivity.find({})
+            .sort({ start_date: -1 })
+            .limit(100)
+            .lean();
+        console.log("🔢 Total fetched:", activities.length);
+        activities.forEach((a) => console.log(`${a.start_date} | ${a.type} | ${a.name}`));
         const trimmed = activities.map((act) => ({
             id: act.id,
             name: act.name,

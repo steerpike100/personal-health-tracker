@@ -106,9 +106,13 @@ export const ActivityList: React.FC = () => {
   <>
     {/** 🚴 Filter & aggregate rides */}
     {(() => {
-      const rides = activities.filter(
-        (act) => act.type === "Ride" || act.name.toLowerCase().includes("rouvy")
-      );
+    const rides = activities.filter(
+  (act) =>
+    act.type === "Ride" ||
+    act.type === "VirtualRide" ||
+    act.name.toLowerCase().includes("rouvy")
+);
+
       const rideDistance = rides.reduce((sum, act) => sum + parseFloat(act.distance_km), 0);
       const rideTime = rides.reduce((sum, act) => sum + act.moving_time_min, 0);
 
