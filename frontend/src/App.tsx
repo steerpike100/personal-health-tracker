@@ -1,21 +1,38 @@
-import { ActivityList } from "./components/ActivityList";
+import { BrowserRouter, Routes, Route, Link } from 'react-router-dom'
+
+import Home from './pages/Home'
+import Dashboard from './pages/Dashboard'
+import Settings from './pages/Settings'
 
 export default function App() {
   return (
-    <div className="min-h-screen bg-blue-900 text-white">
-      <header className="text-center py-10">
-        <h1 className="text-4xl font-bold mb-2">🚴 Steve’s Health Dashboard</h1>
-        <p className="text-lg text-blue-200 italic">Get fit</p>
-      </header>
+    <BrowserRouter>
+      <div className="flex flex-col min-h-screen font-sans">
+        <header className="bg-gray-900 text-white p-4">
+          <div className="max-w-6xl mx-auto flex justify-between items-center">
+            <h1 className="text-xl font-bold">SteveHealthify</h1>
+            <nav className="space-x-4 text-sm">
+              <Link to="/" className="hover:underline">Home</Link>
+              <Link to="/dashboard" className="hover:underline">Dashboard</Link>
+              <Link to="/settings" className="hover:underline">Settings</Link>
+            </nav>
+          </div>
+        </header>
 
-      <main className="max-w-5xl mx-auto px-4 space-y-8 pb-10">
-        <section className="bg-white bg-opacity-10 rounded-xl p-6 shadow-md backdrop-blur">
-          <h2 className="text-xl font-semibold mb-4 text-white">Strava Activities</h2>
-          <ActivityList />
-        </section>
+        <main className="flex-1 bg-white dark:bg-gray-900 text-gray-900 dark:text-white px-4 py-10">
+          <div className="max-w-4xl mx-auto">
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/dashboard" element={<Dashboard />} />
+              <Route path="/settings" element={<Settings />} />
+            </Routes>
+          </div>
+        </main>
 
-      
-      </main>
-    </div>
-  );
+        <footer className="bg-gray-800 text-center text-sm text-gray-400 py-4">
+          © 2025 SteveHealthify. All rights reserved.
+        </footer>
+      </div>
+    </BrowserRouter>
+  )
 }

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { ActivityCard } from "./ActivityCard";
 import { Toast } from "./Toast";
-import { ActivityGraph } from "./ActivityGraph"; // Ensure this path is correct
+import { ActivityGraph } from "./ActivityGraph";
 
 type Activity = {
   id: number;
@@ -17,7 +17,6 @@ export const ActivityList: React.FC = () => {
   const [loading, setLoading] = useState(true);
   const [syncing, setSyncing] = useState(false);
   const [toastMsg, setToastMsg] = useState("");
-
 
   const fetchActivities = async () => {
     try {
@@ -35,14 +34,10 @@ export const ActivityList: React.FC = () => {
   const syncNow = async () => {
     try {
       setSyncing(true);
-  
-      // Trigger backend sync from Strava → MongoDB
       const syncRes = await fetch("/.netlify/functions/strava-sync");
       const syncData = await syncRes.json();
-  
-      // Then fetch from MongoDB → UI
+
       await fetchActivities();
-  
       setToastMsg(`✅ ${syncData.message || "Activities synced!"}`);
     } catch {
       setToastMsg("⚠️ Sync failed.");
@@ -51,113 +46,127 @@ export const ActivityList: React.FC = () => {
     }
   };
 
-
-  
-
   useEffect(() => {
     fetchActivities();
   }, []);
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-8">
       <div className="flex justify-between items-center">
-        <h2 className="text-xl font-bold">Recent Activities</h2>
+        <h2 className="text-2xl font-bold text-gray-900 dark:text-white">
+          Recent Activities
+        </h2>
         <button
-  onClick={syncNow}
-  disabled={syncing}
-  className={`flex items-center gap-2 px-4 py-2 text-sm rounded font-medium transition ${
-    syncing
-      ? "bg-gray-400 cursor-not-allowed"
-      : "bg-blue-600 hover:bg-blue-700 text-white"
-  }`}
->
-  {syncing && (
-    <svg
-      className="w-4 h-4 animate-spin text-white"
-      xmlns="http://www.w3.org/2000/svg"
-      fill="none"
-      viewBox="0 0 24 24"
-    >
-      <circle
-        className="opacity-25"
-        cx="12"
-        cy="12"
-        r="10"
-        stroke="currentColor"
-        strokeWidth="4"
-      ></circle>
-      <path
-        className="opacity-75"
-        fill="currentColor"
-        d="M4 12a8 8 0 018-8v8H4z"
-      ></path>
-    </svg>
-  )}
-  {syncing ? "Syncing..." : "🔁 Sync Now"}
-</button>
-
+          onClick={syncNow}
+          disabled={syncing}
+          className={`flex items-center gap-2 px-4 py-2 text-sm rounded font-semibold transition ${
+            syncing
+              ? "bg-gray-400 cursor-not-allowed text-gray-700"
+              : "bg-indigo-600 hover:bg-indigo-700 text-white"
+          }`}
+        >
+          {syncing && (
+            <svg
+              className="w-4 h-4 animate-spin text-white"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+            >
+              <circle
+                className="opacity-25"
+                cx="12"
+                cy="12"
+                r="10"
+                stroke="currentColor"
+                strokeWidth="4"
+              ></circle>
+              <path
+                className="opacity-75"
+                fill="currentColor"
+                d="M4 12a8 8 0 018-8v8H4z"
+              ></path>
+            </svg>
+          )}
+          {syncing ? "Syncing..." : "🔁 Sync Now"}
+        </button>
       </div>
 
       {loading ? (
-  <p>Loading activities...</p>
-) : activities.length === 0 ? (
-  <p>No activities found.</p>
-) : (
-  <>
-    {/** 🚴 Filter & aggregate rides */}
-    {(() => {
-    const rides = activities.filter(
-  (act) =>
-    act.type === "Ride" ||
-    act.type === "VirtualRide" ||
-    act.name.toLowerCase().includes("rouvy")
-);
+        <p className="text-gray-500 dark:text-gray-400">Loading activities...</p>
+      ) : activities.length === 0 ? (
+        <p className="text-gray-500 dark:text-gray-400">No activities found.</p>
+      ) : (
+        <>
+          {(() => {
+            const rides = activities.filter(
+              (act) =>
+                act.type === "Ride" ||
+                act.type === "VirtualRide" ||
+                act.name.toLowerCase().includes("rouvy")
+            );
 
-      const rideDistance = rides.reduce((sum, act) => sum + parseFloat(act.distance_km), 0);
-      const rideTime = rides.reduce((sum, act) => sum + act.moving_time_min, 0);
+            const rideDistance = rides.reduce(
+              (sum, act) => sum + parseFloat(act.distance_km),
+              0
+            );
+            const rideTime = rides.reduce(
+              (sum, act) => sum + act.moving_time_min,
+              0
+            );
 
-      return (
-        <div className="space-y-4">
-          <h3 className="text-lg font-bold text-white mt-6 mb-1">🚴 Rides</h3>
-          <p className="inline-block bg-white/20 text-white px-4 py-2 rounded-lg text-sm font-medium shadow mb-2">
-  🚴 {rides.length} rides · 📏 {rideDistance.toFixed(1)} km · ⏱️ {rideTime} min
-</p>
-<ActivityGraph data={rides} />
+            return (
+              <div className="space-y-6">
+                <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
+                  🚴 Rides
+                </h3>
+                <p className="text-gray-600 dark:text-gray-300">
+                  {rides.length} rides · {rideDistance.toFixed(1)} km · {rideTime} min
+                </p>
+                <ActivityGraph data={rides} />
+                <div className="grid gap-4 md:grid-cols-2">
+                  {rides.map((act) => (
+                    <ActivityCard key={act.id} activity={act} />
+                  ))}
+                </div>
+              </div>
+            );
+          })()}
 
-          {rides.map((act, index) => (
-            <ActivityCard key={`ride-${index}`} activity={act} />
-          ))}
-        </div>
-      );
-    })()}
+          {(() => {
+            const runWalks = activities.filter(
+              (act) => act.type === "Run" || act.type === "Walk"
+            );
 
-    {/** 🏃 Filter & aggregate runs + walks */}
-    {(() => {
-      const runWalks = activities.filter(
-        (act) => act.type === "Run" || act.type === "Walk"
-      );
-      const runDistance = runWalks.reduce((sum, act) => sum + parseFloat(act.distance_km), 0);
-      const runTime = runWalks.reduce((sum, act) => sum + act.moving_time_min, 0);
+            const runDistance = runWalks.reduce(
+              (sum, act) => sum + parseFloat(act.distance_km),
+              0
+            );
+            const runTime = runWalks.reduce(
+              (sum, act) => sum + act.moving_time_min,
+              0
+            );
 
-      return (
-        <div className="space-y-4">
-          <h3 className="text-lg font-bold text-white mt-6 mb-1">🏃 Runs & Walks</h3>
-          <p className="inline-block bg-white/20 text-white px-4 py-2 rounded-lg text-sm font-medium shadow mb-2">
-  🏃 {runWalks.length} activities · 📏 {runDistance.toFixed(1)} km · ⏱️ {runTime} min
-</p>
-<ActivityGraph data={runWalks} />
-          {runWalks.map((act, index) => (
-            <ActivityCard key={`runwalk-${index}`} activity={act} />
-          ))}
-        </div>
-      );
-    })()}
-  </>
-)}
+            return (
+              <div className="space-y-6 mt-10">
+                <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
+                  🏃 Runs & Walks
+                </h3>
+                <p className="text-gray-600 dark:text-gray-300">
+                  {runWalks.length} activities · {runDistance.toFixed(1)} km · {runTime} min
+                </p>
+                <ActivityGraph data={runWalks} />
+                <div className="grid gap-4 md:grid-cols-2">
+                  {runWalks.map((act) => (
+                    <ActivityCard key={act.id} activity={act} />
+                  ))}
+                </div>
+              </div>
+            );
+          })()}
+        </>
+      )}
 
       {toastMsg && <Toast message={toastMsg} onClose={() => setToastMsg("")} />}
-
     </div>
   );
 };
-
