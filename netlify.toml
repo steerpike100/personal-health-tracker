@@ -13,3 +13,8 @@ command = "npm --workspace frontend run dev"
 targetPort = 5173
 port = 8899
 functions = "backend/dist/netlify/functions"
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
