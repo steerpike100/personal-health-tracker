@@ -17,6 +17,8 @@ export const ActivityList: React.FC = () => {
   const [loading, setLoading] = useState(true);
   const [syncing, setSyncing] = useState(false);
   const [toastMsg, setToastMsg] = useState("");
+  const [showAllRides, setShowAllRides] = useState(false);
+const [showAllRunWalks, setShowAllRunWalks] = useState(false);
 
   const fetchActivities = async () => {
     try {
@@ -114,6 +116,8 @@ export const ActivityList: React.FC = () => {
               0
             );
 
+            const displayedRides = showAllRides ? rides:rides.slice(0,10);
+
             return (
               <div className="space-y-6">
                 <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
@@ -145,6 +149,10 @@ export const ActivityList: React.FC = () => {
               (sum, act) => sum + act.moving_time_min,
               0
             );
+
+             const displayedRunWalks = showAllRunWalks
+    ? runWalks
+    : runWalks.slice(0, 10);
 
             return (
               <div className="space-y-6 mt-10">
