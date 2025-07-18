@@ -128,7 +128,7 @@ const [showAllRunWalks, setShowAllRunWalks] = useState(false);
                 </p>
                 <ActivityGraph data={rides} />
                 <div className="grid gap-4 md:grid-cols-2">
-                  {rides.map((act) => (
+                  {displayedRides.map((act) => (
                     <ActivityCard key={act.id} activity={act} />
                   ))}
                 </div>
@@ -164,7 +164,7 @@ const [showAllRunWalks, setShowAllRunWalks] = useState(false);
                 </p>
                 <ActivityGraph data={runWalks} />
                 <div className="grid gap-4 md:grid-cols-2">
-                  {runWalks.map((act) => (
+                  {displayedRunWalks.map((act) => (
                     <ActivityCard key={act.id} activity={act} />
                   ))}
                 </div>
