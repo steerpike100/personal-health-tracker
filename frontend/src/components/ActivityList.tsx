@@ -132,6 +132,14 @@ const [showAllRunWalks, setShowAllRunWalks] = useState(false);
                     <ActivityCard key={act.id} activity={act} />
                   ))}
                 </div>
+                {rides.length > 10 && (
+        <button
+          onClick={() => setShowAllRides((prev) => !prev)}
+          className="text-blue-500 hover:underline"
+        >
+          {showAllRides ? "Show Less" : "Show All"}
+        </button>
+      )}
               </div>
             );
           })()}
@@ -168,6 +176,14 @@ const [showAllRunWalks, setShowAllRunWalks] = useState(false);
                     <ActivityCard key={act.id} activity={act} />
                   ))}
                 </div>
+                  {runWalks.length > 10 && (
+        <button
+          onClick={() => setShowAllRunWalks((prev) => !prev)}
+          className="text-blue-500 hover:underline"
+        >
+          {showAllRunWalks ? "Show Less" : "Show All"}
+        </button>
+      )}
               </div>
             );
           })()}
