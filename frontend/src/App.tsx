@@ -1,8 +1,8 @@
-import { BrowserRouter, Routes, Route, Link } from 'react-router-dom'
+import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 
-import Home from './pages/Home'
-import Dashboard from './pages/Dashboard'
-import Settings from './pages/Settings'
+import Home from "./pages/Home";
+import Dashboard from "./pages/Dashboard";
+import Settings from "./pages/Settings";
 
 export default function App() {
   return (
@@ -12,9 +12,15 @@ export default function App() {
           <div className="max-w-6xl mx-auto flex justify-between items-center">
             <h1 className="text-xl font-bold">SteveHealthify</h1>
             <nav className="space-x-4 text-sm">
-              <Link to="/" className="hover:underline">Home</Link>
-              <Link to="/dashboard" className="hover:underline">Dashboard</Link>
-              <Link to="/settings" className="hover:underline">Settings</Link>
+              <Link to="/" className="hover:underline">
+                Home
+              </Link>
+              <Link to="/dashboard" className="hover:underline">
+                Dashboard
+              </Link>
+              <Link to="/settings" className="hover:underline">
+                Settings
+              </Link>
             </nav>
           </div>
         </header>
@@ -34,5 +40,5 @@ export default function App() {
         </footer>
       </div>
     </BrowserRouter>
-  )
+  );
 }

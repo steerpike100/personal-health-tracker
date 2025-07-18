@@ -31,7 +31,12 @@ export const ActivityGraph: React.FC<Props> = ({ data }) => {
           <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
           <XAxis dataKey="label" stroke="#9ca3af" />
           <YAxis
-            label={{ value: "km", angle: -90, position: "insideLeft", fill: "#6b7280" }}
+            label={{
+              value: "km",
+              angle: -90,
+              position: "insideLeft",
+              fill: "#6b7280",
+            }}
             stroke="#9ca3af"
           />
           <Tooltip />

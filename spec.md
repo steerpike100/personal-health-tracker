@@ -104,6 +104,3 @@ This document outlines the requirements, architecture, and implementation detail
 - Advanced analytics for training load and efficiency.
 
 ---
-
-
-

@@ -1,5 +1,4 @@
 {
-    "defaultSite": "stevehealthify",
-    "defaultContext": "."
-  }
-  
+  "defaultSite": "stevehealthify",
+  "defaultContext": "."
+}

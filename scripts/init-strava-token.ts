@@ -10,7 +10,9 @@ const STRAVA_CLIENT_SECRET = process.env.STRAVA_CLIENT_SECRET;
 const STRAVA_REFRESH_TOKEN = process.env.STRAVA_REFRESH_TOKEN;
 
 if (!STRAVA_CLIENT_ID || !STRAVA_CLIENT_SECRET || !STRAVA_REFRESH_TOKEN) {
-  console.error("Missing STRAVA_CLIENT_ID, STRAVA_CLIENT_SECRET, or STRAVA_REFRESH_TOKEN in .env");
+  console.error(
+    'Missing STRAVA_CLIENT_ID, STRAVA_CLIENT_SECRET, or STRAVA_REFRESH_TOKEN in .env'
+  );
   process.exit(1);
 }
 
@@ -23,11 +25,11 @@ async function refreshAndSaveToken() {
     method: 'POST',
     headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
     body: new URLSearchParams({
-        client_id: STRAVA_CLIENT_ID as string,
-        client_secret: STRAVA_CLIENT_SECRET as string,
-        grant_type: 'refresh_token',
-        refresh_token: STRAVA_REFRESH_TOKEN as string,
-      }),
+      client_id: STRAVA_CLIENT_ID as string,
+      client_secret: STRAVA_CLIENT_SECRET as string,
+      grant_type: 'refresh_token',
+      refresh_token: STRAVA_REFRESH_TOKEN as string,
+    }),
   });
 
   if (!response.ok) {
@@ -35,12 +37,12 @@ async function refreshAndSaveToken() {
     throw new Error(`Failed to refresh token: ${response.status} ${error}`);
   }
 
-  const json = await response.json() as {
+  const json = (await response.json()) as {
     access_token: string;
     refresh_token: string;
     expires_at: number;
   };
-  
+
   const tokenData = {
     access_token: json.access_token,
     refresh_token: json.refresh_token,
@@ -51,7 +53,7 @@ async function refreshAndSaveToken() {
   console.log(`✅ Token saved to ${STRAVA_TOKEN_PATH}`);
 }
 
-refreshAndSaveToken().catch((err) => {
+refreshAndSaveToken().catch(err => {
   console.error('❌ Failed to initialize token:', err.message);
   process.exit(1);
 });

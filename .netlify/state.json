@@ -1,22 +1,22 @@
 {
-	"geolocation": {
-		"data": {
-			"city": "Wells",
-			"country": {
-				"code": "GB",
-				"name": "United Kingdom"
-			},
-			"subdivision": {
-				"code": "ENG",
-				"name": "England"
-			},
-			"timezone": "Europe/London",
-			"latitude": 51.2111,
-			"longitude": -2.6526,
-			"postalCode": "BA5"
-		},
-		"timestamp": 1751718533559
-	},
-	"context": ".",
-	"siteId": "3814438d-96a5-4740-a1fb-d812b7c2f765"
+  "geolocation": {
+    "data": {
+      "city": "Wells",
+      "country": {
+        "code": "GB",
+        "name": "United Kingdom"
+      },
+      "subdivision": {
+        "code": "ENG",
+        "name": "England"
+      },
+      "timezone": "Europe/London",
+      "latitude": 51.2111,
+      "longitude": -2.6526,
+      "postalCode": "BA5"
+    },
+    "timestamp": 1751718533559
+  },
+  "context": ".",
+  "siteId": "3814438d-96a5-4740-a1fb-d812b7c2f765"
 }

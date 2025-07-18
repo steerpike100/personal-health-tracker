@@ -156,3 +156,4 @@ Description:
   - Test for vulnerabilities in authentication and data handling.
 - Write and run integration tests to confirm that all components (frontend, backend, database) work together reliably.
 - Document any final configuration steps needed for deployment on Netlify and MongoDB Atlas.
+```

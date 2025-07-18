@@ -6,7 +6,9 @@ export async function getValidStravaAccessToken(): Promise<string> {
   const clientSecret = process.env.STRAVA_CLIENT_SECRET;
 
   if (!refreshToken || !clientId || !clientSecret) {
-    throw new Error("❌ Missing Strava credentials (client ID, secret, or refresh token)");
+    throw new Error(
+      "❌ Missing Strava credentials (client ID, secret, or refresh token)",
+    );
   }
 
   const res = await fetch("https://www.strava.com/api/v3/oauth/token", {
@@ -22,7 +24,9 @@ export async function getValidStravaAccessToken(): Promise<string> {
 
   if (!res.ok) {
     const errorText = await res.text();
-    throw new Error(`❌ Failed to refresh Strava token: ${res.status} - ${errorText}`);
+    throw new Error(
+      `❌ Failed to refresh Strava token: ${res.status} - ${errorText}`,
+    );
   }
 
   const data = await res.json();

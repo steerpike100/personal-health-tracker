@@ -15,7 +15,9 @@ const typeIcons: Record<string, string> = {
   Swim: "🏊‍♂️",
 };
 
-export const ActivityCard: React.FC<{ activity: Activity }> = ({ activity }) => {
+export const ActivityCard: React.FC<{ activity: Activity }> = ({
+  activity,
+}) => {
   const { name, type, distance_km, moving_time_min, start_date } = activity;
 
   return (

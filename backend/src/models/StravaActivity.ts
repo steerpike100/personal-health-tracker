@@ -1,4 +1,4 @@
-import mongoose from 'mongoose';
+import mongoose from "mongoose";
 
 const StravaActivitySchema = new mongoose.Schema(
   {
@@ -8,13 +8,13 @@ const StravaActivitySchema = new mongoose.Schema(
     moving_time: Number,
     start_date: String,
     type: String,
-  
   },
   {
-    collection: 'strava_raw_activities',
+    collection: "strava_raw_activities",
     timestamps: true,
-  }
+  },
 );
 
-export const StravaActivity = mongoose.models.StravaActivity
-  || mongoose.model('StravaActivity', StravaActivitySchema);
+export const StravaActivity =
+  mongoose.models.StravaActivity ||
+  mongoose.model("StravaActivity", StravaActivitySchema);

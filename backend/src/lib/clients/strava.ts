@@ -12,9 +12,10 @@ interface StravaActivity {
   start_date: string;
 }
 
-export async function fetchStravaActivities(accessToken: string): Promise<StravaActivity[]> {
+export async function fetchStravaActivities(
+  accessToken: string,
+): Promise<StravaActivity[]> {
   const response = await fetch(`${STRAVA_API_BASE}/athlete/activities`, {
-  
     headers: {
       Authorization: `Bearer ${accessToken}`,
     },
@@ -25,5 +26,5 @@ export async function fetchStravaActivities(accessToken: string): Promise<Strava
     throw new Error(`Strava API error: ${response.status} ${errorText}`);
   }
 
-  return await response.json() as StravaActivity[];
+  return (await response.json()) as StravaActivity[];
 }

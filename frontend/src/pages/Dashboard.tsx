@@ -1,4 +1,4 @@
-    import { ActivityList } from "../components/ActivityList";
+import { ActivityList } from "../components/ActivityList";
 
 export default function Dashboard() {
   return (

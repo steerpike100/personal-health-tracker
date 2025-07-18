@@ -5,7 +5,8 @@ export default function Home() {
         Welcome to <span className="text-indigo-500">SteveHealthify</span>
       </h2>
       <p className="text-lg text-gray-600 dark:text-gray-300">
-        Your personal health dashboard for tracking workouts, steps, and wellness trends.
+        Your personal health dashboard for tracking workouts, steps, and
+        wellness trends.
       </p>
       <div className="flex justify-center gap-4">
         <a

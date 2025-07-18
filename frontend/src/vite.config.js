@@ -9,8 +9,8 @@ export default defineConfig({
     open: true, // Auto-open the browser when running `npm run dev`
   },
   test: {
-    globals: true,  // Allows global test functions like `describe`, `it`, `expect`
+    globals: true, // Allows global test functions like `describe`, `it`, `expect`
     environment: "jsdom", // Simulates a browser environment for React components
-    setupFiles: "./src/setupTests.ts" // Ensures @testing-library/jest-dom is loaded
-  }
+    setupFiles: "./src/setupTests.ts", // Ensures @testing-library/jest-dom is loaded
+  },
 });
